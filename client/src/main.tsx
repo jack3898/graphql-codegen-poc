@@ -7,7 +7,9 @@ const root = document.getElementById("root");
 if (root !== null) {
   createRoot(root).render(
     <GraphQLProvider>
-      <QueryComponent />
+      <main className="p-4">
+        <QueryComponent />
+      </main>
     </GraphQLProvider>
   );
 }
