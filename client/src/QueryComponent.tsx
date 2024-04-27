@@ -1,7 +1,11 @@
 import { useBooksQuery } from "./gql/hooks.js";
 
 export function QueryComponent() {
-  const { data } = useBooksQuery();
+  const { data } = useBooksQuery({
+    onCompleted() {
+      console.log("It completed!");
+    },
+  });
 
   if (!data) {
     return <p>Loading...</p>;
