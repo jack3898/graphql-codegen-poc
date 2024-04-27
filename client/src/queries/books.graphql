@@ -3,5 +3,8 @@ query Books {
     id
     author
     title
+    ... on LongBook {
+      whyitslong
+    }
   }
 }

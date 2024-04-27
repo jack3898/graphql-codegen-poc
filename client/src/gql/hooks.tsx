@@ -21,10 +21,24 @@ export type Scalars = {
 };
 
 export type Book = {
-  __typename?: 'Book';
-  author?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  author: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type LongBook = Book & {
+  __typename?: 'LongBook';
+  author: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
+  whyitslong?: Maybe<Scalars['String']['output']>;
+};
+
+export type NormalBook = Book & {
+  __typename?: 'NormalBook';
+  author: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -35,7 +49,7 @@ export type Query = {
 export type BooksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BooksQuery = { __typename?: 'Query', books?: Array<{ __typename?: 'Book', id?: number | null, author?: string | null, title?: string | null } | null> | null };
+export type BooksQuery = { __typename?: 'Query', books?: Array<{ __typename?: 'LongBook', whyitslong?: string | null, id: number, author: string, title: string } | { __typename?: 'NormalBook', id: number, author: string, title: string } | null> | null };
 
 
 export const BooksDocument = gql`
@@ -44,6 +58,9 @@ export const BooksDocument = gql`
     id
     author
     title
+    ... on LongBook {
+      whyitslong
+    }
   }
 }
     `;
