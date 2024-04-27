@@ -4,7 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "generate": "graphql-codegen --config codegen.ts"
   },
   "author": "Jack Wright",
   "license": "ISC"
