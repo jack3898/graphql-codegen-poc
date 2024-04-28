@@ -1,7 +1,7 @@
-import { books } from "./data.js";
+import { books } from './data.js';
 
 export const resolvers = {
   Query: {
-    books: () => books,
-  },
+    books: (): typeof books => books
+  }
 };

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { gql } from '@apollo/client';
 import * as React from 'react';
 import * as Apollo from '@apollo/client';
