@@ -1,10 +1,10 @@
-import { useBooksQuery } from "./gql/hooks.js";
+import { useBooksQuery } from './gql/hooks.js';
 
-export function QueryComponent() {
+export function QueryComponent(): JSX.Element {
   const { data } = useBooksQuery({
     onCompleted() {
-      console.log("It completed!");
-    },
+      console.log('It completed!');
+    }
   });
 
   if (!data) {
@@ -20,7 +20,7 @@ export function QueryComponent() {
       <ul>
         {data.books?.map((book) => {
           switch (book?.__typename) {
-            case "LongBook":
+            case 'LongBook':
               return (
                 <li key={book.id} className="mb-4">
                   <h2>
@@ -30,7 +30,7 @@ export function QueryComponent() {
                   <p>By {book.author}</p>
                 </li>
               );
-            case "NormalBook":
+            case 'NormalBook':
               return (
                 <li key={book.id} className="mb-4">
                   <h2>

@@ -2,6 +2,6 @@
     "compilerOptions": {
         "strict": true,
         "skipLibCheck": true,
-        "module": "NodeNext"
+        "module": "NodeNext",
     }
 }
