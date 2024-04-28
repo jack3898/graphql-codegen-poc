@@ -2,8 +2,14 @@ import { useAppStore, type BookUnion } from '@/store/appStore.js';
 
 export function BooksList(): JSX.Element {
   const books = useAppStore((cur) => cur.books);
+  const addBook = useAppStore((cur) => cur.addBook);
 
-  return <BooksListView books={books} />;
+  return (
+    <>
+      <BooksListView books={books} />
+      <AddBookButton addBook={addBook} />
+    </>
+  );
 }
 
 export function BooksListView({ books }: { books: BookUnion[] }): JSX.Element {
@@ -33,5 +39,23 @@ export function BooksListView({ books }: { books: BookUnion[] }): JSX.Element {
         }
       })}
     </ul>
+  );
+}
+
+function AddBookButton({ addBook }: { addBook: (book: BookUnion) => void }): JSX.Element {
+  return (
+    <button
+      className="border bg-slate-200 p-2"
+      onClick={() =>
+        addBook({
+          id: Math.random(),
+          author: crypto.randomUUID(),
+          title: crypto.randomUUID(),
+          __typename: 'NormalBook'
+        })
+      }
+    >
+      Add a book
+    </button>
   );
 }

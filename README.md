@@ -26,9 +26,10 @@ That's it.
   - It is Vite, but it should be possible with Webpack
   - I would be delighted if we used Vite though. But understand if we don't
 - Zustand for global state management
-  - Tests re-render logic, results unexpected
+  - Tests re-render logic to make sure it is efficient
   - Bootstrap hook to update store
   - How to consume the store
+  - Glorified reducer, but it's not so coupled the layout of JSX which could make things so much easier
 - MVC pattern in React
   - Zustand as model
   - Parent component as controller
