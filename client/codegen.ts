@@ -7,10 +7,10 @@ const config: CodegenConfig = {
   // But for simplicity, I don't see it as bad that we run the generate script out of CI
   // only when we need to and load it over the gateway then add it to source control
   schema: 'http://localhost:3000',
-  documents: 'src/queries/*-{query,mutation,fragment}.graphql',
+  documents: 'src/graphql/*-{query,mutation,fragment}.graphql',
   emitLegacyCommonJSImports: false,
   generates: {
-    'src/gql/generated-hooks.tsx': {
+    'src/graphql/generated-hooks.tsx': {
       plugins: [
         'typescript',
         'typescript-operations',

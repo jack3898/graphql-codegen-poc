@@ -4,7 +4,7 @@ import {
   type LongBook,
   type NormalBook,
   useLoggedInUserLazyQuery
-} from '@/gql/generated-hooks.js';
+} from '@/graphql/generated-hooks.js';
 import { useEffect } from 'react';
 import { create } from 'zustand';
 

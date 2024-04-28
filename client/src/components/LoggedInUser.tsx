@@ -1,4 +1,4 @@
-import { type LoggedInUser } from '@/gql/generated-hooks.js';
+import { type LoggedInUser } from '@/graphql/generated-hooks.js';
 import { useAppStore } from '@/store/appStore.js';
 
 export function LoggedInUser(): JSX.Element {
