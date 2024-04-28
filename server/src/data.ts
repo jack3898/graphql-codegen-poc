@@ -19,3 +19,9 @@ export const books = [
     __typename: 'LongBook'
   }
 ];
+
+export const user = {
+  id: crypto.randomUUID(),
+  name: 'Jack',
+  occupation: 'Developer'
+};
