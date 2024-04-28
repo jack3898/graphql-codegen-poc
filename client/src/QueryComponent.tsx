@@ -1,4 +1,7 @@
-import { useBooksQuery } from './gql/hooks.js';
+// No matter how deep in the files we are, we have the `@` alias
+// For easy access to our generated hooks
+// I know it's redundant here, but in a large project this could keep things tidier
+import { useBooksQuery } from '@/gql/hooks.js';
 
 export function QueryComponent(): JSX.Element {
   const { data } = useBooksQuery({

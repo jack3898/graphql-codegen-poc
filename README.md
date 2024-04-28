@@ -14,3 +14,5 @@ That's it.
 - ESLint and Prettier working together
 - Eslint with Tailwind CSS
 - ESLint root config without eslint config package
+- Aliasing in Vite, importing root files without nasty relative paths (`../../../../` 🤢)
+  - It is Vite, but it should be possible with Webpack.
