@@ -4,11 +4,12 @@ export default async function sdlFetcher(): Promise<GraphQLSchema> {
   const introspectionQuery = getIntrospectionQuery();
 
   // Get auth cookie
+  // Realistically you would pass username/password but this poc app is too secure for that
   const getCookieRes = await fetch('http://localhost:3000/login');
 
   const cookie = getCookieRes.headers
     .get('set-cookie')
-    ?.match(/^\w+.=([^;]+)/)
+    ?.match(/=([^;]+)/)
     ?.at(1);
 
   // Use auth cookie to fetch sdl
