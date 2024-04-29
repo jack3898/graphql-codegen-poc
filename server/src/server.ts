@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import express from 'express';
 import http from 'node:http';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import cors from 'cors';
 
 const typeDefs = await readFile('src/type-defs.graphql').then((buf) => buf.toString('utf-8'));
 
@@ -19,6 +20,13 @@ const apolloServer = new ApolloServer({
 
 await apolloServer.start();
 await new Promise<void>((resolve) => httpServer.listen({ port: 3000 }, resolve));
+
+expressServer.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  })
+);
 
 console.log(`🚀  Server ready on port ${port}!`);
 
