@@ -8,5 +8,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["codegen.ts", "vite.config.ts"]
+  "exclude": ["codegen.ts", "vite.config.ts", "sdl-fetcher.ts"]
 }

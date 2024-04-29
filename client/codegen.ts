@@ -6,7 +6,13 @@ const config: CodegenConfig = {
   // You can load a backend schema from the filesystem.
   // But for simplicity, I don't see it as bad that we run the generate script out of CI
   // only when we need to and load it over the gateway then add it to source control
-  schema: 'http://localhost:3000',
+  schema: [
+    {
+      'my-api': {
+        loader: './sdl-fetcher.ts'
+      }
+    }
+  ],
   documents: 'src/graphql/*-{query,mutation,fragment}.graphql',
   emitLegacyCommonJSImports: false,
   generates: {
