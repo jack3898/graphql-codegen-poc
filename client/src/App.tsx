@@ -1,36 +1,63 @@
 // No matter how deep in the files we are, we have the `@` alias
 // For easy access to our generated hooks
 // I know it's redundant here, but in a large project this could keep things tidier
-import { BooksList } from './components/BooksList.js';
-import { LoggedInUser } from './components/LoggedInUser.js';
+import { useCallback } from 'react';
+import { Button } from './components/atom/button.js';
+import { Card } from './components/atom/card.js';
+import { BooksList } from './components/common/BooksList.js';
+import { LoggedInUser } from './components/common/LoggedInUser.js';
+import { Layout } from './components/layout/Layouts.js';
 import { useBootstrapApp } from './store/appStore.js';
 
 export function App(): JSX.Element {
   useBootstrapApp();
 
+  const login = useCallback(() => {
+    fetch('http://localhost:3000/login', { credentials: 'include' });
+  }, []);
+
+  const logout = useCallback(() => {
+    fetch('http://localhost:3000/logout', { credentials: 'include' });
+  }, []);
+
+  return <AppView login={login} logout={logout} />;
+}
+
+function AppView({ login, logout }: { login: () => void; logout: () => void }): JSX.Element {
   return (
-    <>
-      <h1 className="text-3xl">Books</h1>
-      <button
-        className="border bg-slate-200 p-2"
-        onClick={() => {
-          fetch('http://localhost:3000/login', { credentials: 'include' });
-        }}
-      >
-        Login
-      </button>
-      <button
-        className="border bg-slate-200 p-2"
-        onClick={() => {
-          fetch('http://localhost:3000/logout', { credentials: 'include' });
-        }}
-      >
-        Logout
-      </button>
-      <hr className="my-4" />
-      <LoggedInUser />
-      <hr className="my-4" />
-      <BooksList />
-    </>
+    <Layout.BentoFull
+      leftPanel={
+        <Card className="h-full">
+          <Card.Body>
+            <h1 className="text-3xl">Books</h1>
+            <BooksList />
+          </Card.Body>
+        </Card>
+      }
+      centralPanel={
+        <Card className="h-full">
+          <Card.Body>
+            <p>Hello!</p>
+          </Card.Body>
+        </Card>
+      }
+      rightPanel={
+        <Card className="h-full">
+          <Card.Body>
+            <LoggedInUser />
+          </Card.Body>
+        </Card>
+      }
+      lowerPanel={
+        <Card className="h-full">
+          <Card.Body>
+            <Button className="mr-3" onClick={login}>
+              Login
+            </Button>
+            <Button onClick={logout}>Logout</Button>
+          </Card.Body>
+        </Card>
+      }
+    />
   );
 }

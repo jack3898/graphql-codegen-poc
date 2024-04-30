@@ -1,18 +1,17 @@
-import { useAppStore, type BookUnion } from '@/store/appStore.js';
+import { type BookUnion } from '@/store/appStore.js';
+import { useBooksQuery } from '@/graphql/generated-hooks.js';
 
 export function BooksList(): JSX.Element {
-  const books = useAppStore((cur) => cur.books);
-  const addBook = useAppStore((cur) => cur.addBook);
+  const { data } = useBooksQuery();
 
-  return (
-    <>
-      <BooksListView books={books} />
-      <AddBookButton addBook={addBook} />
-    </>
-  );
+  return <BooksListView books={data?.books} />;
 }
 
-export function BooksListView({ books }: { books: BookUnion[] }): JSX.Element {
+export function BooksListView({ books }: { books?: BookUnion[] | null }): JSX.Element {
+  if (!books) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <ul>
       {books.map((book) => {
@@ -39,23 +38,5 @@ export function BooksListView({ books }: { books: BookUnion[] }): JSX.Element {
         }
       })}
     </ul>
-  );
-}
-
-function AddBookButton({ addBook }: { addBook: (book: BookUnion) => void }): JSX.Element {
-  return (
-    <button
-      className="border bg-slate-200 p-2"
-      onClick={() =>
-        addBook({
-          id: Math.random(),
-          author: crypto.randomUUID(),
-          title: crypto.randomUUID(),
-          __typename: 'NormalBook'
-        })
-      }
-    >
-      Add a book
-    </button>
   );
 }

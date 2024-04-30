@@ -14,6 +14,7 @@ That's it.
   - Formats output to comply with our Eslint rules (not usually recommended to lint generated code)
   - Use of .graphql file format for easier visibility of queries/mutations/fragments
   - Forces file name convention in codegen config for all queries/mutations/fragments to include query/mutation/fragment in the file name
+  - Still works behind an auth-protected endpoint, with a custom fetcher to login add the token to the request
   - Far easier to manage and maintain
   - New query? Run the generator and use the hook straight away!
   - 100% accuracy in type safety. For example, in my typeDefs for this very project I defined the books as `[Book]`, and was surprised to see `(Book | undefined)[]` as a generated type. Then realised that actually, that was totally correct. So I amended the backend typedefs to `[Book!]` and the generated type was updated accordingly.
