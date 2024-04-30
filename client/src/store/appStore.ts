@@ -1,6 +1,7 @@
 import { produce } from 'immer';
 import { useEffect } from 'react';
 import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 
 export type Person = {
   id: number;
@@ -14,19 +15,19 @@ interface AppStore {
   addPerson: (role: Role, person: Person) => void;
 }
 
-export const useAppStore = create<AppStore>()((set) => ({
-  people: {
-    standard: [],
-    moderator: [],
-    admin: []
-  },
-  addPerson: (role, person): void =>
-    set(
-      produce((state) => {
+export const useAppStore = create<AppStore>()(
+  immer((set) => ({
+    people: {
+      standard: [],
+      moderator: [],
+      admin: []
+    },
+    addPerson: (role, person): void =>
+      set((state) => {
         state.people[role].push(person);
       })
-    )
-}));
+  }))
+);
 
 // I would necessarily recommend making an app this way, it's just a POC of zustand re-render performance
 // I.e., when we update the user, only the components that read user data should re-render.
