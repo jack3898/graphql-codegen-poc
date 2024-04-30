@@ -11,15 +11,21 @@ export type Role = 'admin' | 'standard' | 'moderator';
 
 interface AppStore {
   people: Record<Role, Person[]>;
+  totalPeople: () => number;
   addPerson: (role: Role, person: Person) => void;
 }
 
 export const useAppStore = create<AppStore>()(
-  immer((set) => ({
+  immer((set, get) => ({
     people: {
       standard: [],
       moderator: [],
       admin: []
+    },
+    totalPeople: (): number => {
+      const people = get().people;
+
+      return people.admin.length + people.moderator.length + people.standard.length;
     },
     addPerson: (role, person): void =>
       set((state) => {

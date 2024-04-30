@@ -9,6 +9,7 @@ import { LoggedInUser } from './components/common/LoggedInUser.js';
 import { Layout } from './components/layout/Layouts.js';
 import { useBootstrapApp } from './store/appStore.js';
 import { PeopleList } from './components/common/PeopleList.js';
+import { PeopleCount } from './components/common/PeopleCount.js';
 
 export function App(): JSX.Element {
   useBootstrapApp();
@@ -59,6 +60,8 @@ function AppView({ login, logout }: { login: () => void; logout: () => void }): 
               Login
             </Button>
             <Button onClick={logout}>Logout</Button>
+            <br />
+            People loaded: <PeopleCount />
           </Card.Body>
         </Card>
       }
