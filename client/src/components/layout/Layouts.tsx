@@ -19,7 +19,7 @@ Layout.BentoFull = function BentoFullLayout({
   return (
     <div
       className={cn(
-        `grid [grid-template-areas:'left_center_right''bottom_bottom_bottom'] grid-cols-[auto_1fr_auto] gap-2`
+        `h-full w-full grid [grid-template-areas:'left_center_right''bottom_bottom_bottom'] grid-cols-[auto_1fr_auto] gap-2`
       )}
     >
       <aside className="[grid-area:left]">{leftPanel}</aside>

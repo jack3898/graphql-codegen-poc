@@ -1,15 +1,16 @@
 import { createRoot } from 'react-dom/client';
 import { GraphQLProvider } from './Apollo.js';
 import { App } from './App.js';
+import React from 'react';
 
 const root = document.getElementById('root');
 
 if (root !== null) {
   createRoot(root).render(
-    <GraphQLProvider>
-      <main className="p-4">
+    <React.StrictMode>
+      <GraphQLProvider>
         <App />
-      </main>
-    </GraphQLProvider>
+      </GraphQLProvider>
+    </React.StrictMode>
   );
 }

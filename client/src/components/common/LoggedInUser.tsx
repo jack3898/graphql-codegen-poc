@@ -1,4 +1,5 @@
 import { useLoggedInUserQuery, type LoggedInUser } from '@/graphql/generated-hooks.js';
+import { MessageOfTheDay } from './MessageOfTheDay.js';
 
 export function LoggedInUser(): JSX.Element {
   const { data } = useLoggedInUserQuery();
@@ -12,8 +13,13 @@ export function LoggedInUserView({ user }: { user?: LoggedInUser | null }): JSX.
   }
 
   return (
-    <strong>
-      Logged in as: {user.name} ({user.occupation?.toLocaleLowerCase()})!
-    </strong>
+    <>
+      <strong>
+        Logged in as: {user.name} ({user.occupation?.toLocaleLowerCase()})!
+      </strong>
+      <p>
+        Message of the day: <MessageOfTheDay />
+      </p>
+    </>
   );
 }
