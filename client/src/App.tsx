@@ -8,6 +8,7 @@ import { BooksList } from './components/common/BooksList.js';
 import { LoggedInUser } from './components/common/LoggedInUser.js';
 import { Layout } from './components/layout/Layouts.js';
 import { useBootstrapApp } from './store/appStore.js';
+import { PeopleList } from './components/common/PeopleList.js';
 
 export function App(): JSX.Element {
   useBootstrapApp();
@@ -38,6 +39,9 @@ function AppView({ login, logout }: { login: () => void; logout: () => void }): 
         <Card className="h-full">
           <Card.Body>
             <p>Hello!</p>
+            <p>Here are some people from Zustand, inserted with Immer:</p>
+            <br />
+            <PeopleList />
           </Card.Body>
         </Card>
       }

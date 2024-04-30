@@ -1,5 +1,6 @@
-import { type BookUnion } from '@/store/appStore.js';
-import { useBooksQuery } from '@/graphql/generated-hooks.js';
+import { type LongBook, type NormalBook, useBooksQuery } from '@/graphql/generated-hooks.js';
+
+type BookUnion = LongBook | NormalBook;
 
 export function BooksList(): JSX.Element {
   const { data } = useBooksQuery();
