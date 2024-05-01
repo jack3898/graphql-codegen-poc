@@ -8,7 +8,7 @@ import cors from 'cors';
 
 const typeDefs = await readFile('src/type-defs.graphql').then((buf) => buf.toString('utf-8'));
 
-const port = 3000;
+const port = 8000;
 const expressServer = express();
 const httpServer = http.createServer(expressServer);
 
@@ -19,7 +19,7 @@ const apolloServer = new ApolloServer({
 });
 
 await apolloServer.start();
-await new Promise<void>((resolve) => httpServer.listen({ port: 3000 }, resolve));
+await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
 expressServer.use(
   cors({

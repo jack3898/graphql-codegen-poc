@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 export const books = [
   {
     id: 1,

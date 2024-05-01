@@ -16,11 +16,11 @@ export function App(): JSX.Element {
   const addMotd = useAppStore((store) => store.setMessageOfTheDay);
 
   const login = useCallback(() => {
-    fetch('http://localhost:3000/login', { credentials: 'include' });
+    fetch('http://localhost:8000/login', { credentials: 'include' });
   }, []);
 
   const logout = useCallback(() => {
-    fetch('http://localhost:3000/logout', { credentials: 'include' });
+    fetch('http://localhost:8000/logout', { credentials: 'include' });
   }, []);
 
   return <AppView login={login} logout={logout} addMotd={addMotd} />;
