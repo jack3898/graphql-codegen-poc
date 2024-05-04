@@ -30,9 +30,9 @@ export const user = {
     { id: 1, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
     { id: 2, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
     { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
-    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
-    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
-    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
-    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 }
+    { id: 4, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 5, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 6, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 7, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 }
   ]
 };

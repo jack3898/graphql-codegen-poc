@@ -3,5 +3,6 @@
         "strict": true,
         "skipLibCheck": true,
         "module": "NodeNext",
+        "exactOptionalPropertyTypes": true,
     }
 }

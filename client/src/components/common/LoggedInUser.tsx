@@ -7,7 +7,7 @@ export function LoggedInUser(): JSX.Element {
   return <LoggedInUserView user={data?.loggedInUser} />;
 }
 
-export function LoggedInUserView({ user }: { user?: LoggedInUser | null }): JSX.Element {
+export function LoggedInUserView({ user }: { user: LoggedInUser | null | undefined }): JSX.Element {
   if (!user) {
     return <strong>Logging in...</strong>;
   }

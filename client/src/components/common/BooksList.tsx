@@ -9,7 +9,7 @@ export function BooksList(): JSX.Element {
   return <BooksListView books={data?.books} />;
 }
 
-export function BooksListView({ books }: { books?: BookUnion[] | null }): JSX.Element {
+export function BooksListView({ books }: { books: BookUnion[] | null | undefined }): JSX.Element {
   if (!books) {
     return <p>Loading...</p>;
   }

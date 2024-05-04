@@ -13,7 +13,7 @@ export function UserImageScrollerView({
   images,
   zoom
 }: {
-  images?: Image[];
+  images: Image[] | undefined;
   zoom: number;
 }): JSX.Element {
   if (!images) {
@@ -21,7 +21,7 @@ export function UserImageScrollerView({
   }
 
   return (
-    <>
+    <div className="flex origin-top flex-col gap-8">
       {images.map((img) => {
         const { width, height } = scale(img.width, img.height, zoom);
 
@@ -30,17 +30,15 @@ export function UserImageScrollerView({
             className="rounded object-cover shadow-lg"
             key={img.id}
             src={img.url}
-            width={width}
-            height={height}
             style={{
               minWidth: width,
               minHeight: height,
-              width,
-              height
+              height,
+              width
             }}
           />
         );
       })}
-    </>
+    </div>
   );
 }
