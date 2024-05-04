@@ -11,6 +11,7 @@ import { useAppStore } from './store/appStore.js';
 import { PeopleList } from './components/common/PeopleList.js';
 import { PeopleCount } from './components/common/PeopleCount.js';
 import { LoadPeopleButton } from './components/common/LoadPeople.js';
+import { H1, H2 } from './components/atom/heading.js';
 
 export function App(): JSX.Element {
   const addMotd = useAppStore((store) => store.setMessageOfTheDay);
@@ -41,7 +42,7 @@ function AppView({
         headerPanel={
           <Card className="size-full bg-violet-100">
             <Card.Body>
-              <h1 className="text-4xl">Page title</h1>
+              <H1 className="text-4xl">Page title</H1>
             </Card.Body>
           </Card>
         }
@@ -50,7 +51,7 @@ function AppView({
             <Card.Body>
               <div className="flex h-full flex-col overflow-auto">
                 <div className="shrink">
-                  <h1 className="text-3xl">Books</h1>
+                  <H2 className="text-3xl">Books</H2>
                   <BooksList />
                 </div>
                 <div className="grow">
@@ -77,12 +78,27 @@ function AppView({
           </Card>
         }
         centerPanel={
-          <Card className="size-full overflow-auto bg-slate-100">
+          <Card className="size-full overflow-auto bg-orange-100">
             <Card.Body className="flex flex-col gap-2">
-              <h2 className="text-3xl">Some images to showcase layout cell overflow</h2>
-              <img src="https://picsum.photos/1081/1920" width="1081" height="1920"></img>
-              <img src="https://picsum.photos/1080/1920" width="1080" height="1920"></img>
-              <img src="https://picsum.photos/1079/1920" width="1079" height="1920"></img>
+              <H2>Some images to showcase layout cell overflow</H2>
+              <img
+                src="https://picsum.photos/1081/1920"
+                width="1081"
+                height="1920"
+                className="rounded"
+              ></img>
+              <img
+                src="https://picsum.photos/1080/1920"
+                width="1080"
+                height="1920"
+                className="rounded"
+              ></img>
+              <img
+                src="https://picsum.photos/1079/1920"
+                width="1079"
+                height="1920"
+                className="rounded"
+              ></img>
             </Card.Body>
           </Card>
         }
