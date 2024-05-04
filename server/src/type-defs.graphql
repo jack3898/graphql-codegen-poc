@@ -26,4 +26,12 @@ type LoggedInUser {
   id: String!
   name: String!
   occupation: String
+  records: [Image!]!
+}
+
+type Image {
+  id: Int!
+  url: String!
+  width: Int!
+  height: Int!
 }

@@ -32,11 +32,20 @@ export type Book = {
   title: Scalars['String']['output'];
 };
 
+export type Image = {
+  __typename?: 'Image';
+  height: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  url: Scalars['String']['output'];
+  width: Scalars['Int']['output'];
+};
+
 export type LoggedInUser = {
   __typename?: 'LoggedInUser';
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   occupation?: Maybe<Scalars['String']['output']>;
+  records: Array<Image>;
 };
 
 export type LongBook = Book & {
@@ -85,6 +94,13 @@ export type LoggedInUserQuery = {
     id: string;
     name: string;
     occupation?: string | null;
+    records: Array<{
+      __typename?: 'Image';
+      height: number;
+      id: number;
+      url: string;
+      width: number;
+    }>;
   } | null;
 };
 
@@ -93,6 +109,7 @@ export type UserFragmentFragment = {
   id: string;
   name: string;
   occupation?: string | null;
+  records: Array<{ __typename?: 'Image'; height: number; id: number; url: string; width: number }>;
 };
 
 export const UserFragmentFragmentDoc = gql`
@@ -100,6 +117,12 @@ export const UserFragmentFragmentDoc = gql`
     id
     name
     occupation
+    records {
+      height
+      id
+      url
+      width
+    }
   }
 `;
 export const BooksDocument = gql`

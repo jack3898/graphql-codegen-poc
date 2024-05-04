@@ -12,6 +12,7 @@ import { PeopleList } from './components/common/PeopleList.js';
 import { PeopleCount } from './components/common/PeopleCount.js';
 import { LoadPeopleButton } from './components/common/LoadPeople.js';
 import { H1, H2 } from './components/atom/heading.js';
+import { UserImageScroller } from './components/common/ImageScroller.js';
 
 export function App(): JSX.Element {
   const addMotd = useAppStore((store) => store.setMessageOfTheDay);
@@ -79,26 +80,11 @@ function AppView({
         }
         centerPanel={
           <Card className="size-full overflow-auto bg-orange-100">
-            <Card.Body className="flex flex-col gap-2">
+            <Card.Body>
               <H2>Some images to showcase layout cell overflow</H2>
-              <img
-                src="https://picsum.photos/1081/1920"
-                width="1081"
-                height="1920"
-                className="rounded"
-              ></img>
-              <img
-                src="https://picsum.photos/1080/1920"
-                width="1080"
-                height="1920"
-                className="rounded"
-              ></img>
-              <img
-                src="https://picsum.photos/1079/1920"
-                width="1079"
-                height="1920"
-                className="rounded"
-              ></img>
+              <div className="flex flex-col gap-2">
+                <UserImageScroller />
+              </div>
             </Card.Body>
           </Card>
         }

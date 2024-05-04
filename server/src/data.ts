@@ -25,5 +25,14 @@ export const books = [
 export const user = {
   id: crypto.randomUUID(),
   name: 'Jack',
-  occupation: 'Developer'
+  occupation: 'Developer',
+  records: [
+    { id: 1, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 2, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 },
+    { id: 3, url: 'https://picsum.photos/1080/1920', width: 1080, height: 1920 }
+  ]
 };

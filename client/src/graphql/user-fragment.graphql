@@ -2,4 +2,10 @@ fragment UserFragment on LoggedInUser {
   id
   name
   occupation
+  records {
+    height
+    id
+    url
+    width
+  }
 }
