@@ -13,6 +13,7 @@ import { PeopleCount } from './components/common/PeopleCount.js';
 import { LoadPeopleButton } from './components/common/LoadPeople.js';
 import { H1, H2 } from './components/atom/heading.js';
 import { UserImageScroller } from './components/common/ImageScroller.js';
+import { ZoomControls } from './components/common/ZoomControls.js';
 
 export function App(): JSX.Element {
   const addMotd = useAppStore((store) => store.setMessageOfTheDay);
@@ -82,7 +83,10 @@ function AppView({
           <Card className="size-full overflow-auto bg-orange-100">
             <Card.Body>
               <H2>Some images to showcase layout cell overflow</H2>
-              <div className="flex flex-col gap-2">
+              <div className="relative flex flex-col gap-2">
+                <div className="sticky top-2 rounded border bg-cyan-100 p-1 text-center shadow">
+                  <ZoomControls />
+                </div>
                 <UserImageScroller />
               </div>
             </Card.Body>

@@ -1,3 +1,4 @@
+import { clamp } from '@/utils/clamp.js';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -8,10 +9,15 @@ export type Person = {
 
 export type Role = 'admin' | 'standard' | 'moderator';
 
-interface AppStore {
+export interface AppStore {
   messageOfTheDay: string;
-  setMessageOfTheDay: (message: string) => void;
   people: Record<Role, Person[]>;
+  zoomPercent: number;
+  resetZoom: () => void;
+  zoomMultiplier: () => number;
+  zoomIn: (by?: number) => void;
+  zoomOut: (by?: number) => void;
+  setMessageOfTheDay: (message: string) => void;
   totalPeople: () => number;
   addPerson: (role: Role, person: Person) => void;
 }
@@ -24,12 +30,31 @@ export const useAppStore = create<AppStore>()(
       admin: []
     },
     messageOfTheDay: '',
-    setMessageOfTheDay: (message: string): void => {
+    zoomPercent: 100,
+    resetZoom(): void {
+      set((state) => {
+        state.zoomPercent = 100;
+      });
+    },
+    zoomIn(by = 10): void {
+      set((state) => {
+        state.zoomPercent = clamp(50, 150, state.zoomPercent + by);
+      });
+    },
+    zoomOut(by = 10): void {
+      set((state) => {
+        state.zoomPercent = clamp(50, 150, state.zoomPercent - by);
+      });
+    },
+    zoomMultiplier(): number {
+      return get().zoomPercent / 100;
+    },
+    setMessageOfTheDay(message: string): void {
       set((state) => {
         state.messageOfTheDay = message;
       });
     },
-    totalPeople: (): number => {
+    totalPeople(): number {
       const people = get().people;
 
       return people.admin.length + people.moderator.length + people.standard.length;
