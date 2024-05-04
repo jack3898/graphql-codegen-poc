@@ -6,7 +6,7 @@ import { Button } from './components/atom/button.js';
 import { Card } from './components/atom/card.js';
 import { BooksList } from './components/common/BooksList.js';
 import { LoggedInUser } from './components/common/LoggedInUser.js';
-import { Layout } from './components/layout/Layouts.js';
+import { BentoFullLayout } from './components/layout/Layouts.js';
 import { useAppStore } from './store/appStore.js';
 import { PeopleList } from './components/common/PeopleList.js';
 import { PeopleCount } from './components/common/PeopleCount.js';
@@ -36,48 +36,65 @@ function AppView({
   addMotd: (message: string) => void;
 }): JSX.Element {
   return (
-    <div className="w-full p-2">
-      <Layout.BentoFull
-        leftPanel={
-          <Card className="h-full bg-slate-100">
+    <div className="h-screen p-2">
+      <BentoFullLayout
+        headerPanel={
+          <Card className="size-full bg-violet-100">
             <Card.Body>
-              <h1 className="text-3xl">Books</h1>
-              <BooksList />
+              <h1 className="text-4xl">Page title</h1>
             </Card.Body>
           </Card>
         }
-        centralPanel={
-          <Card className="h-full bg-slate-100">
+        leftPanel={
+          <Card className="size-full w-96 overflow-auto bg-slate-100">
             <Card.Body>
-              <p>Hello!</p>
-              <p>
-                Click the "Load people" button to populate this complex object in the store! And the
-                footer should update too with an updated count. POC of the store being used across
-                the app in an delocalised manner.
-              </p>
-              <br />
-              <PeopleList />
-              <br />
-              <br />
-              <LoadPeopleButton />
-              <br />
-              <br />
-              <Button onClick={() => addMotd("Ya doin' great!")}>
-                Add a motivational message of the day 😀
-              </Button>
-              <br />
+              <div className="flex h-full flex-col overflow-auto">
+                <div className="shrink">
+                  <h1 className="text-3xl">Books</h1>
+                  <BooksList />
+                </div>
+                <div className="grow">
+                  <hr className="my-4" />
+                  <p>Hello!</p>
+                  <p>
+                    Click the "Load people" button to populate this complex object in the store! And
+                    the footer should update too with an updated count. POC of the store being used
+                    across the app in an delocalised manner.
+                  </p>
+                  <br />
+                  <PeopleList />
+                  <br />
+                  <br />
+                  <LoadPeopleButton />
+                  <br />
+                  <br />
+                  <Button onClick={() => addMotd("Ya doin' great!")}>
+                    Add a motivational message of the day 😀
+                  </Button>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        }
+        centerPanel={
+          <Card className="size-full overflow-auto bg-slate-100">
+            <Card.Body className="flex flex-col gap-2">
+              <h2 className="text-3xl">Some images to showcase layout cell overflow</h2>
+              <img src="https://picsum.photos/1081/1920" width="1081" height="1920"></img>
+              <img src="https://picsum.photos/1080/1920" width="1080" height="1920"></img>
+              <img src="https://picsum.photos/1079/1920" width="1079" height="1920"></img>
             </Card.Body>
           </Card>
         }
         rightPanel={
-          <Card className="h-full bg-slate-100">
+          <Card className="size-full w-96 bg-slate-100">
             <Card.Body>
               <LoggedInUser />
             </Card.Body>
           </Card>
         }
         lowerPanel={
-          <Card className="h-full bg-blue-50">
+          <Card className="size-full bg-blue-50">
             <Card.Body>
               <Button className="mr-3" onClick={login}>
                 Login
