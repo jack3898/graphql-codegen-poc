@@ -5,7 +5,7 @@ export default async function sdlFetcher(): Promise<GraphQLSchema> {
 
   // Get auth cookie
   // Realistically you would pass username/password but this poc app is too secure for that
-  const getCookieRes = await fetch('http://localhost:3000/login');
+  const getCookieRes = await fetch('http://localhost:8000/login');
 
   const cookie = getCookieRes.headers
     .get('set-cookie')
@@ -13,7 +13,7 @@ export default async function sdlFetcher(): Promise<GraphQLSchema> {
     ?.at(1);
 
   // Use auth cookie to fetch sdl
-  const response = await fetch('http://localhost:3000/graphql', {
+  const response = await fetch('http://localhost:8000/graphql', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',

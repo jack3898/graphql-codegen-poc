@@ -15,7 +15,8 @@ const httpServer = http.createServer(expressServer);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  introspection: true
 });
 
 await apolloServer.start();
