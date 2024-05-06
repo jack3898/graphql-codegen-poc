@@ -37,7 +37,7 @@ export function ImageViewerHtml(): JSX.Element {
         className="flex grow flex-col items-center gap-8 overflow-auto"
         onScroll={() => {
           if (ref.current) {
-            scrollPercentRef.current = +getScrollPercentage(ref.current).toFixed(0);
+            scrollPercentRef.current = getScrollPercentage(ref.current);
           }
         }}
       >
