@@ -41,13 +41,9 @@ export function ImageViewerHtml(): JSX.Element {
           }
         }}
       >
-        {ref && (
-          <>
-            {data?.loggedInUser?.records.map((record) => (
-              <Img parentRef={ref} record={record} scale={scale} key={record.id}></Img>
-            ))}
-          </>
-        )}
+        {data?.loggedInUser?.records.map((record) => (
+          <Img parentRef={ref} record={record} scale={scale} key={record.id}></Img>
+        ))}
       </div>
     </div>
   );

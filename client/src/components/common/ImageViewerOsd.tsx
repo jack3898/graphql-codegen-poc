@@ -52,9 +52,7 @@ export function ImageViewerOsd(): JSX.Element {
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="shrink">
-        <p>
-          Zoom: <ImageViewerZoom />
-        </p>
+        Zoom: <ImageViewerZoom />
       </div>
       <OpenSeadragonViewer className="grow" />
     </div>
