@@ -79,7 +79,7 @@ function AppView({
           </Card>
         }
         centerPanel={
-          <Card className="relative size-full overflow-auto bg-orange-100">
+          <Card className="size-full overflow-hidden bg-orange-100">
             <Card.Body className="size-full">
               <ImageViewerToggler />
             </Card.Body>
