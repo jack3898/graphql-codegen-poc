@@ -1,9 +1,8 @@
 import { createReactOpenSeadragon } from 'react-osd';
-import { Button } from '../atom/button.js';
-import { useState } from 'react';
 import { MouseTracker, Point } from 'openseadragon';
 import { clamp } from '@/utils/clamp.js';
 import { calculateNewZoom } from '@/utils/calculateNewZoom.js';
+import { useLoggedInUserQuery } from '@/graphql/generated-hooks.js';
 
 const minZoom = 0.2;
 const maxZoom = 2;
@@ -17,8 +16,7 @@ const { OpenSeadragonViewer, useOpenSeadragon } = createReactOpenSeadragon(
     animationTime: 0.3,
     minZoomLevel: minZoom,
     maxZoomLevel: maxZoom,
-    mouseNavEnabled: false,
-    id: 'osd-renderer'
+    mouseNavEnabled: false
   },
   (id, viewer) => {
     new MouseTracker({
@@ -42,32 +40,24 @@ const { OpenSeadragonViewer, useOpenSeadragon } = createReactOpenSeadragon(
   }
 );
 
-export function ImageViewer(): JSX.Element {
+export function ImageViewerOsd(): JSX.Element {
   const viewer = useOpenSeadragon((state) => state.viewer);
-  const [view, setView] = useState(true);
+  useLoggedInUserQuery({
+    onCompleted(data) {
+      data.loggedInUser?.records.forEach((record, index) => {
+        viewer?.addSimpleImage({ url: record.url, y: index * 1.9 });
+      });
+    }
+  });
 
   return (
     <div className="flex h-full flex-col gap-2">
-      <Button onClick={() => setView((cur) => !cur)}>Toggle OSD!</Button>
-      {view && (
-        <>
-          <div className="shrink">
-            <p>
-              Zoom: <ImageViewerZoom />
-            </p>
-            <Button
-              onClick={() => {
-                viewer?.addSimpleImage({ url: 'https://picsum.photos/200/300' });
-                viewer?.addSimpleImage({ url: 'https://picsum.photos/200/301', y: 1.6 });
-                viewer?.addSimpleImage({ url: 'https://picsum.photos/200/299', y: 1.6 * 2 });
-              }}
-            >
-              Add imagery!
-            </Button>
-          </div>
-          <OpenSeadragonViewer className="grow" />
-        </>
-      )}
+      <div className="shrink">
+        <p>
+          Zoom: <ImageViewerZoom />
+        </p>
+      </div>
+      <OpenSeadragonViewer className="grow" />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import { PeopleList } from './components/common/PeopleList.js';
 import { PeopleCount } from './components/common/PeopleCount.js';
 import { LoadPeopleButton } from './components/common/LoadPeople.js';
 import { H1, H2 } from './components/atom/heading.js';
-import { ImageViewer } from './components/common/ImageViewer.js';
+import { ImageViewerToggler } from './components/common/ImageViewerToggler.js';
 
 export function App(): JSX.Element {
   const addMotd = useAppStore((store) => store.setMessageOfTheDay);
@@ -79,9 +79,9 @@ function AppView({
           </Card>
         }
         centerPanel={
-          <Card className="size-full overflow-auto bg-orange-100">
+          <Card className="relative size-full overflow-auto bg-orange-100">
             <Card.Body className="size-full">
-              <ImageViewer />
+              <ImageViewerToggler />
             </Card.Body>
           </Card>
         }
