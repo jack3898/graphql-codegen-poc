@@ -6,7 +6,7 @@ import { Button } from './components/atom/button.js';
 import { Card } from './components/atom/card.js';
 import { BooksList } from './components/common/BooksList.js';
 import { LoggedInUser } from './components/common/LoggedInUser.js';
-import { BentoFullLayout } from './components/layout/Layouts.js';
+import { BentoFullLayout } from './components/layout/BentoLayout.js';
 import { useAppStore } from './store/appStore.js';
 import { PeopleList } from './components/common/PeopleList.js';
 import { PeopleCount } from './components/common/PeopleCount.js';
