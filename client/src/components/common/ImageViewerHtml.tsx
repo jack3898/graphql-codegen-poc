@@ -1,7 +1,8 @@
-import { useLoggedInUserQuery } from '@/graphql/generated-hooks.js';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { type Image, useLoggedInUserQuery } from '@/graphql/generated-hooks.js';
+import { type MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '../atom/button.js';
 import { scrollToPercentage, getScrollPercentage } from '@/utils/scrollUtils.js';
+import { useInView } from 'react-intersection-observer';
 
 export function ImageViewerHtml(): JSX.Element {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -9,6 +10,7 @@ export function ImageViewerHtml(): JSX.Element {
   // Maybe this could be fixed in the future
   const scrollPercentRef = useRef(0);
   const [scale, setScale] = useState(2);
+  const { data } = useLoggedInUserQuery();
 
   const scrollTo = useCallback((percent: number): void => {
     if (ref.current) {
@@ -39,25 +41,40 @@ export function ImageViewerHtml(): JSX.Element {
           }
         }}
       >
-        <ImageList scale={scale} />
+        {ref && (
+          <>
+            {data?.loggedInUser?.records.map((record) => (
+              <Img parentRef={ref} record={record} scale={scale} key={record.id}></Img>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
 }
 
-const ImageList = memo(function ImageList({ scale }: { scale: number }): JSX.Element {
-  const { data } = useLoggedInUserQuery();
+function Img({
+  parentRef,
+  record,
+  scale
+}: {
+  parentRef: MutableRefObject<HTMLElement | null>;
+  record: Image;
+  scale: number;
+}): JSX.Element {
+  const [ref, inView] = useInView({
+    root: parentRef.current
+  });
 
   return (
-    <>
-      {data?.loggedInUser?.records.map((record) => (
-        <img
-          key={record.id}
-          src={record.url}
-          width={record.width / scale}
-          height={record.height / scale}
-        ></img>
-      ))}
-    </>
+    <img
+      ref={ref}
+      id={`image-${record.id}`}
+      key={record.id}
+      src={inView ? record.url : ''}
+      width={record.width / scale}
+      height={record.height / scale}
+      className="rounded shadow"
+    ></img>
   );
-});
+}

@@ -12,9 +12,9 @@ export function ImageViewerToggler(): JSX.Element {
         <Button onClick={() => setMode((cur) => !cur)} className="mr-4">
           Toggle viewer mode
         </Button>
-        <strong>Mode: {mode ? 'OSD' : 'HTML'}</strong>
+        <strong>Mode: {mode ? 'HTML' : 'OSD'}</strong>
       </div>
-      <div className="grow overflow-auto">{mode ? <ImageViewerOsd /> : <ImageViewerHtml />}</div>
+      <div className="grow overflow-auto">{mode ? <ImageViewerHtml /> : <ImageViewerOsd />}</div>
     </div>
   );
 }
