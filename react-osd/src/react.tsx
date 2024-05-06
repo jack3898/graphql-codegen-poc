@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import newOpenSeadragon, { type Options } from 'openseadragon';
+import newOpenSeadragon, { type Viewer, type Options } from 'openseadragon';
 import { useEffect } from 'react';
 import { useStore } from 'zustand';
 import { createStore } from 'zustand/vanilla';
@@ -31,12 +31,15 @@ import { osdViewerOperations, type ViewerStore } from './store.js';
  *
  * Currently, there is no use of context. Placement of the component and hook is completely loose.
  */
-export function createReactOpenSeadragon(osdOptions: Options) {
+export function createReactOpenSeadragon(
+  osdOptions: Options,
+  onMount?: (id: string, viewer: Viewer) => void
+) {
   const { id = crypto.randomUUID(), ...restOfOsdOptions } = osdOptions;
 
   const store = createStore<ViewerStore>()((...ops) => ({ ...osdViewerOperations(...ops) }));
 
-  function OpenSeadragonViewerComponent(): JSX.Element {
+  function OpenSeadragonViewerComponent(props: React.ComponentPropsWithoutRef<'div'>): JSX.Element {
     useEffect(() => {
       const viewer = newOpenSeadragon({ id, ...restOfOsdOptions });
 
@@ -50,6 +53,8 @@ export function createReactOpenSeadragon(osdOptions: Options) {
 
       console.log('OSD has been created');
 
+      onMount?.(id, viewer);
+
       return (): void => {
         console.log('OSD has been destroyed');
         store.getState().unregisterOsd();
@@ -57,7 +62,7 @@ export function createReactOpenSeadragon(osdOptions: Options) {
     }, []);
 
     return (
-      <div id={id} style={{ height: '100%' }}>
+      <div id={id} {...props}>
         {/* OSD canvas will be mounted here via the useEffect */}
       </div>
     );
