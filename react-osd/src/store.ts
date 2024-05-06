@@ -1,26 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { type StateCreator } from 'zustand/vanilla';
 import { type Viewer } from 'openseadragon';
-import { createStore } from 'zustand/vanilla';
-import { useStore } from 'zustand';
-import { immer } from 'zustand/middleware/immer';
 
 export interface ViewerStore {
-  viewer: Viewer;
+  viewer: Viewer | undefined;
+  registerOsd: (osd: Viewer) => void;
+  unregisterOsd: () => void;
   zoom: () => number;
 }
 
-export function createViewerStore(viewer: Viewer) {
-  const store = createStore<ViewerStore>()(
-    immer((_, get) => ({
-      viewer,
-      zoom(): number {
-        return get().viewer.viewport.getZoom();
-      }
-    }))
-  );
-
-  return {
-    store,
-    useStore: <T>(selector: (state: ViewerStore) => T) => useStore(store, selector)
-  };
-}
+export const osdViewerOperations: StateCreator<ViewerStore> = (set, get) => ({
+  viewer: undefined,
+  registerOsd(osd): void {
+    set((state) => ({ ...state, viewer: osd }));
+  },
+  unregisterOsd() {
+    get().viewer?.destroy();
+    set((state) => ({ ...state, viewer: undefined }));
+  },
+  zoom(): number {
+    return +(get().viewer?.viewport.getZoom() ?? 0).toFixed(1);
+  }
+});
