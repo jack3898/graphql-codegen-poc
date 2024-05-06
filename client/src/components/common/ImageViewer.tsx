@@ -3,6 +3,7 @@ import { Button } from '../atom/button.js';
 import { useState } from 'react';
 import { MouseTracker, Point } from 'openseadragon';
 import { clamp } from '@/utils/clamp.js';
+import { calculateNewZoom } from '@/utils/calculateNewZoom.js';
 
 const minZoom = 0.2;
 const maxZoom = 2;
@@ -25,10 +26,8 @@ const { OpenSeadragonViewer, useOpenSeadragon } = createReactOpenSeadragon(
       scrollHandler: (event): void => {
         // @ts-expect-error - shift key DOES exist on the event
         if (event.originalEvent.shiftKey) {
-          const oldZoom = viewer.viewport.getZoom();
           // @ts-expect-error - scroll DOES exist on the event
-          const delta = event.scroll / 10;
-          const newZoom = oldZoom + delta;
+          const newZoom = calculateNewZoom(viewer.viewport.getZoom(), event.scroll);
 
           viewer.viewport.zoomTo(clamp(minZoom, maxZoom, newZoom));
         } else {
