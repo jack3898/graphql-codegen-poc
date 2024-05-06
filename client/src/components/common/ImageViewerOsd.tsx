@@ -30,12 +30,11 @@ const { OpenSeadragonViewer, useOpenSeadragon } = createReactOpenSeadragon(
           viewer.viewport.zoomTo(clamp(minZoom, maxZoom, newZoom));
         } else {
           // @ts-expect-error - scroll DOES exist on the event
-          const scrollY = viewer.viewport.deltaPointsFromPixels(new Point(0, -event.scroll * 40));
+          const scrollY = viewer.viewport.deltaPointsFromPixels(new Point(0, -event.scroll * 100));
 
           viewer.viewport.panBy(new Point(0, scrollY.y));
         }
-      },
-      dblClickTimeThreshold: 1000
+      }
     });
   }
 );
